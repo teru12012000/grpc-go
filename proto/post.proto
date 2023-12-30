@@ -1,0 +1,34 @@
+syntax="proto3";
+
+package post;
+
+option go_package="../post"; 
+
+message GetReq{}
+
+message GetRes{
+    string id=1;
+    string name=2;
+    string content=3;
+}
+
+message PostReq{
+    string name=1;
+    string content=2;
+}
+
+message PostRes{
+    string message=1;
+}
+
+service PostService{
+    rpc GetContent(GetReq) returns(GetRes){};
+    rpc PostContent(PostReq) returns (PostRes){};
+}
+
+/*
+protoc --go_out=plugins=grpc:post post.proto
+を実行する。
+https://grpc.io/docs/languages/go/quickstart/
+上記リンクでprotoc-gen-goのやつをinstallする
+*/
